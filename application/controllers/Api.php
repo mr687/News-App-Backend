@@ -13,50 +13,62 @@ class Api extends RestController
 
 	public function user_register_post()
 	{
-		// $data['name'] = "Davi Nomoeh Dani";
-		// $data['email'] = "davinomoehdanino@gmail.com";
-		// $data['password'] = password_hash('qwe123', PASSWORD_DEFAULT);
-		// $data['createAt'] = time();
-		// $data['removeAt'] = 0;
-		$this->ApiModel->insert_user($data);
+		$data = $this->post();
+		$data['createAt'] = time();
+		$data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+		$result = $this->ApiModel->insert_user($data);
+
+		if($result == EMAIL_EXISTS){
+			$this->response([
+				"status" => false,
+				"message" => "Email is already exists."
+			], 200);
+		}else if($result == REGISTER_SUCCESS){
+			$this->response([
+				"status" => true,
+				"message" => "Registration successfully."
+			], 200);
+		}else{
+			$this->response([
+				"status" => false,
+				"message" => "Registration failed."
+			], 200);
+		}
 	}
 
 	public function user_login_post()
 	{
-		$email = 'davinomoehdanino@gmail.com';
-		$password = 'qwe123';
-		$data = $this->ApiModel->get_user($email);
+		$email = $this->post()['email'];
+		$password = $this->post()['password'];
+		$user = $this->ApiModel->get_user($email);
 
 		$result = [];
 
-		if(count($data) > 0)
+		if(count($user) > 0)
 		{
-			if(password_verify($password, $data['password']))
+			if(password_verify($password, $user['password']))
 			{
-				
 				// update token
-				$token = generateUserToken($data);
-				$this->ApiModel->update_user_token($token, $data['id']);
-				
-				$data = $this->ApiModel->get_user($email);
-				unset($data['password']);
+				$token = generateUserToken($user);
+				$this->ApiModel->update_user_token($token, $user['id']);
+				$user = $this->ApiModel->get_user($email);
+				unset($user['password']);
+				unset($user['last_login']);
 
 				$result['status'] = true;
 				$result['message'] = "Success";
-				$result['user'] = $data;
+				$result['user'] = $user;
 			}
 			else
 			{
 				$result['status'] = false;
 				$result['message'] = "Wrong password.";
-				$result['user'] = [];
 			}
 		}
 		else
 		{
 			$result['status'] = false;
 			$result['message'] = "Email not found.";
-			$result['user'] = [];
 		}
 		$this->response($result, 200);
 	}
@@ -94,7 +106,7 @@ class Api extends RestController
 		$category = isset($_GET['category']) ? $_GET['category'] : 0;
 		$id = isset($_GET['id']) ? $_GET['id'] : 0;
 
-		$data = $this->ApiModel->get_articles(null, $offset, $limit, $type, $category);
+		$data = $this->ApiModel->get_articles($id, $offset, $limit, $type, $category);
 		
 		if($data)
 		{

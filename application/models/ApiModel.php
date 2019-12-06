@@ -28,6 +28,7 @@ class ApiModel extends CI_Model
 		$this->db->where('type', $type);
 		$this->db->where('removeAt', 0);
 		$this->db->limit($limit, $offset);
+		$this->db->order_by('createAt', 'desc');
 		$result = $this->db->get('news')->result_array();
 		foreach($result as $k => $v)
 		{
@@ -59,7 +60,13 @@ class ApiModel extends CI_Model
 	}
 	public function insert_user($data)
 	{
+		$user = $this->get_user($data['email']);
+		if(count($user) > 0){
+			return EMAIL_EXISTS;
+		}
+
 		$this->db->insert('users', $data);
+		return $this->db->insert_id() > 0 ? REGISTER_SUCCESS: 0;
 	}
 
 	public function get_user($email = null, $id = null)
@@ -68,13 +75,14 @@ class ApiModel extends CI_Model
 		{
 			$this->db->where('email', $email);
 		}
-
+		
 		if($id != null)
 		{
 			$this->db->where('id', $id);
 		}
 		$this->db->limit(1);
-		return $this->db->get('users')->result_array()[0];
+		$result = $this->db->get('users')->result_array();
+		return  count($result) > 0 ? $result[0] : $result;
 	}
 
 	public function update_user_token($token, $id)
