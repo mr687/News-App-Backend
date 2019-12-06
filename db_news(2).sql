@@ -2,10 +2,10 @@
 -- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Dec 05, 2019 at 04:56 PM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.9
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 06 Des 2019 pada 10.19
+-- Versi server: 10.4.6-MariaDB
+-- Versi PHP: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Struktur dari tabel `admin`
 --
 
 CREATE TABLE `admin` (
@@ -47,16 +47,16 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `admin`
+-- Dumping data untuk tabel `admin`
 --
 
 INSERT INTO `admin` (`id`, `username`, `password`, `email`, `last_signin`, `created_date`, `ip`, `verification_key`, `admin_group`, `name`, `address`, `address2`, `city`, `state`, `zip`) VALUES
-(1, 'admin', 'a1fa99a1724242d0931d4f9c62dd56a6', 'support@lenapo.com', 2147483647, 123132121, '127.0.0.1', 'dfasdfa3a33a', 1, 'Joseph Opanel', NULL, NULL, NULL, NULL, NULL);
+(1, 'admin', 'a1fa99a1724242d0931d4f9c62dd56a6', 'support@lenapo.com', 2147483647, 123132121, '::1', 'dfasdfa3a33a', 1, 'Joseph Opanel', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin_groups`
+-- Struktur dari tabel `admin_groups`
 --
 
 CREATE TABLE `admin_groups` (
@@ -65,7 +65,7 @@ CREATE TABLE `admin_groups` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `admin_groups`
+-- Dumping data untuk tabel `admin_groups`
 --
 
 INSERT INTO `admin_groups` (`id`, `name`) VALUES
@@ -74,7 +74,7 @@ INSERT INTO `admin_groups` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Struktur dari tabel `categories`
 --
 
 CREATE TABLE `categories` (
@@ -86,7 +86,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `categories`
+-- Dumping data untuk tabel `categories`
 --
 
 INSERT INTO `categories` (`id`, `category`, `imageUrl`, `createAt`, `removeAt`) VALUES
@@ -102,7 +102,7 @@ INSERT INTO `categories` (`id`, `category`, `imageUrl`, `createAt`, `removeAt`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `keys`
+-- Struktur dari tabel `keys`
 --
 
 CREATE TABLE `keys` (
@@ -119,7 +119,7 @@ CREATE TABLE `keys` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `logs`
+-- Struktur dari tabel `logs`
 --
 
 CREATE TABLE `logs` (
@@ -138,7 +138,7 @@ CREATE TABLE `logs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `news`
+-- Struktur dari tabel `news`
 --
 
 CREATE TABLE `news` (
@@ -156,7 +156,7 @@ CREATE TABLE `news` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `news`
+-- Dumping data untuk tabel `news`
 --
 
 INSERT INTO `news` (`id`, `category_id`, `comment_count`, `views_count`, `title`, `contents`, `createAt`, `removeAt`, `imageUrl`, `videoUrl`, `type`) VALUES
@@ -186,7 +186,7 @@ INSERT INTO `news` (`id`, `category_id`, `comment_count`, `views_count`, `title`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `news_comments`
+-- Struktur dari tabel `news_comments`
 --
 
 CREATE TABLE `news_comments` (
@@ -201,7 +201,7 @@ CREATE TABLE `news_comments` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `news_favorites`
+-- Struktur dari tabel `news_favorites`
 --
 
 CREATE TABLE `news_favorites` (
@@ -215,7 +215,7 @@ CREATE TABLE `news_favorites` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `news_views`
+-- Struktur dari tabel `news_views`
 --
 
 CREATE TABLE `news_views` (
@@ -229,7 +229,7 @@ CREATE TABLE `news_views` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -245,127 +245,127 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Dumping data untuk tabel `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `imageUrl`, `createAt`, `removeAt`, `token`, `last_login`) VALUES
-(1, 'Davi Nomoeh Dani', 'davinomoehdanino@gmail.com', '$2y$10$BowEqvapFL.QIv7oQPq/FuE2ZhB2pPrXrLKtITaI53tsWC4C1s6PC', NULL, 1575356161, 0, '04651bb2e578d8db5e154862cebd64bc', 0);
+(11, 'Davi Nomoeh Dani', 'davinomoehdanino1@gmail.com', '$2y$10$z45DPAHm7aJXWy69geptPOdZi2J0zZxSpCBg4z3AB4xyfS1eee0N6', NULL, 1575619197, NULL, '5f9405ac295539fc596b0f2cc9fa21dc', 0);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `admin`
+-- Indeks untuk tabel `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `admin_groups`
+-- Indeks untuk tabel `admin_groups`
 --
 ALTER TABLE `admin_groups`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `categories`
+-- Indeks untuk tabel `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `keys`
+-- Indeks untuk tabel `keys`
 --
 ALTER TABLE `keys`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `news`
+-- Indeks untuk tabel `news`
 --
 ALTER TABLE `news`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `news_comments`
+-- Indeks untuk tabel `news_comments`
 --
 ALTER TABLE `news_comments`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `news_favorites`
+-- Indeks untuk tabel `news_favorites`
 --
 ALTER TABLE `news_favorites`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `news_views`
+-- Indeks untuk tabel `news_views`
 --
 ALTER TABLE `news_views`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT untuk tabel `admin`
 --
 ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `admin_groups`
+-- AUTO_INCREMENT untuk tabel `admin_groups`
 --
 ALTER TABLE `admin_groups`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `categories`
+-- AUTO_INCREMENT untuk tabel `categories`
 --
 ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `keys`
+-- AUTO_INCREMENT untuk tabel `keys`
 --
 ALTER TABLE `keys`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `news`
+-- AUTO_INCREMENT untuk tabel `news`
 --
 ALTER TABLE `news`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT for table `news_comments`
+-- AUTO_INCREMENT untuk tabel `news_comments`
 --
 ALTER TABLE `news_comments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `news_favorites`
+-- AUTO_INCREMENT untuk tabel `news_favorites`
 --
 ALTER TABLE `news_favorites`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `news_views`
+-- AUTO_INCREMENT untuk tabel `news_views`
 --
 ALTER TABLE `news_views`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
