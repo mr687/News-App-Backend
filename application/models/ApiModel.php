@@ -16,6 +16,15 @@ class ApiModel extends CI_Model
 		unset($v['total']);
 		return $v;
 	}
+	public function article_view($id = null, $offset = 0, $limit = 10, $type = 0, $category = 0){
+		if($id){
+			$this->db->where('id', $id);
+		}
+		$article = $this->get_articles($id, $offset, $limit, $type, $category);
+		var_dump($article);
+		exit;
+		return $this->db->update('news', ['views_count' => $viewCount]);
+	}
 	public function get_articles($id = null, $offset = 0, $limit = 10, $type = 0, $category = 0){
 		if($id)
 		{

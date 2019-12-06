@@ -98,6 +98,15 @@ class Api extends RestController
 		$this->response($result, 200);
 	}
 
+	public function view_post(){
+		
+	}
+
+	public function like_post(){
+		$uid = $this->post('uid');
+		$token = $this->post('token');
+	}
+
 	public function articles_get()
 	{
 		$offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
@@ -123,7 +132,6 @@ class Api extends RestController
 			$this->response($result, 200);
 		}
 	}
-
 
 	public function categories_get()
 	{
