@@ -87,3 +87,5 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 defined("EMAIL_EXISTS")		   OR define('EMAIL_EXISTS', 666);
 defined("PASSWORD_INVALID")		   OR define('PASSWORD_INVALID', 667);
 defined("REGISTER_SUCCESS")		   OR define('REGISTER_SUCCESS', 668);
+defined("TOKEN_INVALID")		   OR define('TOKEN_INVALID', 669);
+defined("ARTICLE_ADD_SUCCESS")		   OR define('ARTICLE_ADD_SUCCESS', 670);
