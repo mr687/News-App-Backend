@@ -60,6 +60,7 @@ class ArticleModel extends CI_Model
 		if($id != null){
 			$this->db->where('id', $id);
 		}
+		$this->db->order_by('createAt', 'DESC');
 		$result = $this->db->get('news')->result();
 		
 		foreach($result as $k => $v)

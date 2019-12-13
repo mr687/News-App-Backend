@@ -228,6 +228,19 @@ class Api extends RestController
 		$this->response($print, 200);
 	}
 
+	public function article_search_post(){
+		$query = $this->post('query', true);
+		$data = $this->ApiModel->article_search($query);
+
+		if($data){
+			$result['status'] = true;
+			$result['messages'] = 'Success';
+			$result['total'] = count($data);
+			$result['articles'] = $data;
+			$this->response($result, 200);
+		}
+	}
+
 	public function articles_get()
 	{
 		$uid = $this->post('uid', true);
@@ -236,15 +249,17 @@ class Api extends RestController
 		$type = $this->get('type', true) != null ? $this->get('type', true) : 0;
 		$category = $this->get('category', true) != null ? $this->get('category', true) : 0;
 		$id = $this->get('id', true) != null ? $this->get('id', true) : 0;
+		$sort = $this->get('sort', true);
+		$order = $this->get('order', true);
 
-		$data = $this->ApiModel->get_articles($id, $offset, $limit, $type, $category);
+		$data = $this->ApiModel->get_articles($id, $offset, $limit, $type, $category, $sort, $order);
 		
 		if($data)
 		{
 			$result['status'] = true;
 			$result['messages'] = 'Success';
 			$result['total'] = count($data);
-			if($type == 0 && $id < 1) $result['popular'] = $this->ApiModel->getPopularArticle();
+			if($type != 1) $result['popular'] = $this->ApiModel->getPopularArticle();
 			if($id > 0) $result['articles'] = $data[0];
 			if($id == 0) $result['articles'] = $data;
 			$this->response($result, 200);

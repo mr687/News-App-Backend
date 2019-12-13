@@ -59,6 +59,13 @@ class ApiModel extends CI_Model
 			return TOKEN_INVALID;
 		}
 	}
+	public function article_search($query){
+		$this->db->like('title', $query);
+		$this->db->or_like('contents', $query);
+		// $this->db->or_like('category', $query);
+		$this->db->order_by('createAt', 'DESC');
+		return $this->db->get('news')->result_array();
+	}
 	public function article_view($id = 0, $type = 0, $category = 0){
 		if($id < 1){
 			return false;
@@ -105,7 +112,7 @@ class ApiModel extends CI_Model
 		}
 		return false;
 	}
-	public function get_articles($id = null, $offset = 0, $limit = 10, $type = 0, $category = 0){
+	public function get_articles($id = null, $offset = 0, $limit = 10, $type = 2, $category = 0, $sort = null, $order = null){
 		if($id)
 		{
 			$this->db->where('id', $id);
@@ -114,10 +121,12 @@ class ApiModel extends CI_Model
 		{
 			$this->db->where('category_id', $category);
 		}
-		$this->db->where('type', $type);
+		if($type < 2){
+			$this->db->where('type', $type);
+		}
 		$this->db->where('removeAt', 0);
 		$this->db->limit($limit, $offset);
-		$this->db->order_by('createAt', 'desc');
+		if($sort != null && $order != null) $this->db->order_by($sort, $order);
 		$result = $this->db->get('news')->result_array();
 		foreach($result as $k => $v)
 		{
