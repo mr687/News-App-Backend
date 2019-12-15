@@ -97,7 +97,7 @@ class Api extends RestController
 
 		$this->response($result, 200);
 	}
-
+	
 	public function view_post(){
 		$articleId = $this->post("articleId", true);
 

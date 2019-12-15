@@ -26,6 +26,20 @@ class ApiModel extends CI_Model
 		}
 		return false;
 	}
+	private function sendNotify(){
+		$beamsClient = new \Pusher\PushNotifications\PushNotifications(array(
+			"instanceId" => "a20fcf46-8e37-449d-bc4c-d3dc46bd55a8",
+			"secretKey" => "183B0229D6CCD811D0D738A074CC207FC1027D885A597FA2923C6785243D593C",
+		  ));
+		  
+		  $publishResponse = $beamsClient->publishToInterests(
+			array("43bku3gfyurgoe8g43ouergfleufi3"),
+			array("fcm" => array("notification" => array(
+			  "title" => "News App",
+			  "body" => "New article updated.!",
+			)),
+		  ));
+	}
 	public function article_add($data = []){
 		if(!isset($data['uid']) || !isset($data['token'])){
 			return 0;
@@ -53,7 +67,7 @@ class ApiModel extends CI_Model
 			}
 
 			$add = $this->new_by_user_add($user['id'], $user['token'], $this->db->insert_id());
-
+			$this->sendNotify();
 			return $add ? ARTICLE_ADD_SUCCESS : 0;
 		}else{
 			return TOKEN_INVALID;
